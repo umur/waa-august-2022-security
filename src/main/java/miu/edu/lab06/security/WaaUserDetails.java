@@ -7,12 +7,14 @@ import miu.edu.lab06.model.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.stereotype.Component;
 
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Data
+@Component
 public class WaaUserDetails implements UserDetails {
     private Long id;
     private String email;
@@ -21,6 +23,8 @@ public class WaaUserDetails implements UserDetails {
     private String password;
 
     private List<Role> roles;
+
+    public WaaUserDetails() {}
 
     public WaaUserDetails(User user) {
         this.id = user.getId();

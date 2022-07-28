@@ -8,7 +8,6 @@ import java.time.Instant;
 @Data
 public class ProductDTO {
     private Long id;
-    @WaaWord
     private String name;
     private Double price;
 
