@@ -1,8 +1,10 @@
 package edu.miu.springsecurity1.service.impl;
 
+import edu.miu.springsecurity1.entity.User;
 import edu.miu.springsecurity1.model.LoginRequest;
 import edu.miu.springsecurity1.model.LoginResponse;
 import edu.miu.springsecurity1.model.RefreshTokenRequest;
+import edu.miu.springsecurity1.model.UserResponse;
 import edu.miu.springsecurity1.security.JwtHelper;
 import edu.miu.springsecurity1.service.UaaService;
 import lombok.RequiredArgsConstructor;
@@ -48,5 +50,10 @@ public class UaaServiceImpl implements UaaService {
             return loginResponse;
         }
         return new LoginResponse();
+    }
+
+    @Override
+    public UserResponse save(User user) {
+        return null;
     }
 }
