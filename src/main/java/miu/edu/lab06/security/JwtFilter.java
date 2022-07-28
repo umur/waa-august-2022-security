@@ -26,6 +26,7 @@ public class JwtFilter extends OncePerRequestFilter {
         this.userDetailsService = userDetailsService;
     }
 
+
     @Override
     protected void doFilterInternal(HttpServletRequest request,
                                     HttpServletResponse response,
@@ -40,7 +41,7 @@ public class JwtFilter extends OncePerRequestFilter {
             try{
                 email = jwtHelper.getUsernameFromToken(token);
             }catch (ExpiredJwtException e){
-                String isRefreshToken = request.getHeader("isRefreshToken");
+                e.printStackTrace();
             }
         }
 
@@ -50,8 +51,6 @@ public class JwtFilter extends OncePerRequestFilter {
             if (isTokenValid) {
                 UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
                         userDetails, null, userDetails.getAuthorities());
-
-                // TODO ????
                 authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
                 SecurityContextHolder.getContext().setAuthentication(authentication);
             }
