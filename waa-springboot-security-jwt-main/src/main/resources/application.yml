@@ -1,0 +1,22 @@
+spring:
+  application:
+    name: spring-data-demo
+  datasource:
+    password: postgrespw
+    url: jdbc:postgresql://localhost:55001/spring-security-aug
+    username: postgres
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+    show-sql: true
+    defer-datasource-initialization: true
+  sql:
+    init:
+      mode: always
+server:
+  port: 8080
