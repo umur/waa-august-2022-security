@@ -34,13 +34,13 @@ public class AppUserController implements BasicControllerInterface<AppUser, Long
     }
 
     @Override
-    @PostMapping
+//    @PostMapping
     public ResponseEntity<AppUser> save(@RequestBody AppUser appUser) {
         return ResponseEntity.ok().body(appUserService.save(appUser));
     }
 
     @Override
-    @DeleteMapping("/{id}")
+//    @DeleteMapping("/{id}")
     public ResponseEntity<?> delete(@PathVariable("id") Long id) {
         appUserService.delete(id);
         return ResponseEntity.ok().build();

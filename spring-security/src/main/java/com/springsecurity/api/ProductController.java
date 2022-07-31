@@ -4,7 +4,10 @@ import com.springsecurity.api.util.BasicControllerInterface;
 import com.springsecurity.domain.Product;
 import com.springsecurity.service.ProductService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
@@ -12,6 +15,7 @@ import java.util.Collection;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/products")
+@Slf4j
 public class ProductController implements BasicControllerInterface<Product, Long> {
     private final ProductService productService;
 
@@ -33,7 +37,7 @@ public class ProductController implements BasicControllerInterface<Product, Long
 
     @Override
     @PostMapping
-    public ResponseEntity<Product> save(Product product) {
+    public ResponseEntity<Product> save(@RequestBody Product product) {
         return ResponseEntity.ok().body(productService.save(product));
     }
 

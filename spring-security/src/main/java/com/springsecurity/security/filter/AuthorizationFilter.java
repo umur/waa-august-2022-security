@@ -39,7 +39,7 @@ public class AuthorizationFilter extends OncePerRequestFilter {
                                     HttpServletResponse response,
                                     FilterChain filterChain) throws ServletException, IOException {
         String servletPath = request.getServletPath();
-        if (servletPath.equals("/api/login") || servletPath.equals("/api/token/refresh")) {
+        if (servletPath.equals("/api/login") || servletPath.equals("/api/refresh-token")) {
             filterChain.doFilter(request, response);
         } else {
             String authorizationHeader = request.getHeader(AUTHORIZATION);

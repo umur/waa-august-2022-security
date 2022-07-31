@@ -31,20 +31,13 @@ public class SpringSecurityApplication {
 
             List<Role> rolesList1 = new ArrayList<>();
             rolesList1.add(roleService.getRoleByName("ADMIN"));
+            rolesList1.add(roleService.getRoleByName("USER"));
 
             List<Role> rolesList2 = new ArrayList<>();
             rolesList2.add(roleService.getRoleByName("USER"));
 
             appUserService.save(new AppUser(null, "Tom Hanks", "hanks", "123", rolesList1));
             appUserService.save(new AppUser(null, "Tom Holland", "holland", "123", rolesList2));
-
-            productService.save(new Product(null, "Car"));
-            productService.save(new Product(null, "House"));
-            productService.save(new Product(null, "Plane"));
-            productService.save(new Product(null, "Yacht"));
-            productService.save(new Product(null, "Villa"));
-
-
         };
     }
 }
