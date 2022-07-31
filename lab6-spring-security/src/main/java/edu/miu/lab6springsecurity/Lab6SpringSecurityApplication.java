@@ -15,4 +15,6 @@ public class Lab6SpringSecurityApplication {
 	public ModelMapper getModelMapper() {
 		return new ModelMapper();
 	}
+
+
 }

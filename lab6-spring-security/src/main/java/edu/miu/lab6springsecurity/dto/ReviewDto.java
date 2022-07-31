@@ -3,9 +3,8 @@ package edu.miu.lab6springsecurity.dto;
 import lombok.Data;
 
 @Data
-public class ProductDto {
+public class ReviewDto {
     private int id;
-
-    private String name;
-    private float price;
+    private String comment;
+    private int numberOfStars;
 }

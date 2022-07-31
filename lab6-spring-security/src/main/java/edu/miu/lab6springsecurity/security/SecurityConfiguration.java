@@ -1,5 +1,7 @@
 package edu.miu.lab6springsecurity.security;
 
+import edu.miu.lab6springsecurity.security.JwtFilter;
+import edu.miu.lab6springsecurity.security.WaaRequestFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -20,7 +22,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     private final UserDetailsService abUserDetailsService;
     private final JwtFilter jwtFilter;
-
+    private final WaaRequestFilter waaRequestFilter;
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(abUserDetailsService);
@@ -41,6 +43,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         http.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
+        http.addFilterAfter(waaRequestFilter, UsernamePasswordAuthenticationFilter.class);
     }
 
     @Bean

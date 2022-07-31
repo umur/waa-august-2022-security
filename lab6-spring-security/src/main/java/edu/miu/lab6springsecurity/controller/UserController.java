@@ -1,9 +1,7 @@
 package edu.miu.lab6springsecurity.controller;
 
 import edu.miu.lab6springsecurity.dto.UserDto;
-import edu.miu.lab6springsecurity.service.ProductService;
 import edu.miu.lab6springsecurity.service.UserService;
-import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

@@ -11,13 +11,17 @@ import java.util.List;
 @Entity
 public class User {
     @Id
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     private String email;
     private String password;
     private String firstname;
     private String lastname;
+
+    @JsonBackReference
+    @OneToOne(mappedBy = "user")
+    private Product product;
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable

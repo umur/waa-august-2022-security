@@ -1,10 +1,8 @@
 package edu.miu.lab6springsecurity.controller;
 
 import edu.miu.lab6springsecurity.dto.UserDto;
-import edu.miu.lab6springsecurity.entity.User;
 import edu.miu.lab6springsecurity.model.LoginRequest;
 import edu.miu.lab6springsecurity.service.UaaService;
-import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,7 +23,7 @@ public class UaaController {
     }
 
     @PostMapping("/signup")
-    public ResponseEntity<?> signup(@RequestBody User user) {
-        return ResponseEntity.ok().body(uaaService.signup(user));
+    public ResponseEntity<?> signup(@RequestBody UserDto userDto) {
+        return ResponseEntity.ok().body(uaaService.signup(userDto));
     }
 }

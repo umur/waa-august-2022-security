@@ -18,7 +18,6 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 
 @Service
@@ -54,10 +53,11 @@ public class UaaServiceImpl implements UaaService {
     @Autowired
     private PasswordEncoder passwordEncoder;
     @Override
-    public UserDto signup(User user) {
-        var userRole = roleRepo.findByRole("USER");
-        user.setRoles(Arrays.asList(userRole));
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-        return modelMapper.map(userRepo.save(user), UserDto.class);
+    public UserDto signup(UserDto userDto) {
+        var user = modelMapper.map(userDto, User.class);
+        user.setPassword(passwordEncoder.encode(userDto.getPassword()));
+        user.setRoles(Arrays.asList(roleRepo.findByRole("USER")));
+        userRepo.save(user);
+        return modelMapper.map(user, UserDto.class);
     }
 }

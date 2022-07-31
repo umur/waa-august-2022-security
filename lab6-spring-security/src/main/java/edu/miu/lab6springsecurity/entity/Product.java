@@ -20,6 +20,11 @@ public class Product {
     private List<Review> reviews;
 
     @JsonManagedReference
+    @OneToOne
+    @JoinColumn(name = "id_user")
+    private User user;
+
+    @JsonManagedReference
     @ManyToMany(mappedBy = "products")
     private List<Category> categories;
 

@@ -1,7 +1,6 @@
 package edu.miu.lab6springsecurity.service.impl;
 
 import edu.miu.lab6springsecurity.dto.UserDto;
-import edu.miu.lab6springsecurity.entity.User;
 import edu.miu.lab6springsecurity.repository.UserRepo;
 import edu.miu.lab6springsecurity.service.UserService;
 import org.modelmapper.ModelMapper;
