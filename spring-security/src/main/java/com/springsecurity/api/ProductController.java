@@ -1,6 +1,7 @@
 package com.springsecurity.api;
 
 import com.springsecurity.api.util.BasicControllerInterface;
+import com.springsecurity.aspect.OffensiveWordFilter;
 import com.springsecurity.domain.Product;
 import com.springsecurity.service.ProductService;
 import lombok.RequiredArgsConstructor;
@@ -36,9 +37,12 @@ public class ProductController implements BasicControllerInterface<Product, Long
     }
 
     @Override
+    @OffensiveWordFilter
     @PostMapping
     public ResponseEntity<Product> save(@RequestBody Product product) {
-        return ResponseEntity.ok().body(productService.save(product));
+        log.info(product.toString());
+        Product p = productService.save(product);
+        return ResponseEntity.ok().body(p);
     }
 
     @Override
