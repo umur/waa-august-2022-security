@@ -1,0 +1,40 @@
+server:
+  port: 8080
+
+spring:
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+  datasource:
+    url: jdbc:postgresql://localhost:5432/waa_lab6
+    username: postgres
+    password: postgres
+
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      minimumIdle: 2
+      maximumPoolSize: 10
+      idleTimeout: 30000
+      maxLifetime: 60000
+      leakDetectionThreshold: 180000
+      connectionTimeout: 120000
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    properties:
+      jdbc:
+        lob:
+          non_contextual_creation: true
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+    open-in-view: true
+  main:
+    lazy-initialization: false
+  jackson:
+      default-property-inclusion: non_null
+
+security:
+  jwt:
+    secret:
+      4vzfsjym7t9lu
