@@ -10,6 +10,7 @@ import java.util.Map;
 @RestController
 @RequestMapping("api/uaa")
 @RequiredArgsConstructor
+@CrossOrigin
 public class UaaController {
 
     private final UaaServiceImpl service;

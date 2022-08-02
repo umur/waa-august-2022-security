@@ -12,6 +12,7 @@ import java.util.List;
 @RestController
 @RequestMapping("api/products")
 @RequiredArgsConstructor
+@CrossOrigin
 public class ProductController {
     private final ProductServiceImpl service;
 
@@ -37,6 +38,7 @@ public class ProductController {
         return service.save(product);
     }
 
+    @DeleteMapping
     public void delete(Long id) {
         service.delete(id);
     }

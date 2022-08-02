@@ -35,7 +35,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/api/uaa/**").permitAll()
                 .antMatchers("/api/users").hasAuthority("admin")
-                .antMatchers("/api/products").hasAuthority("user")
+//                .antMatchers("/api/products").hasAuthority("user")
                 .anyRequest()
                 .authenticated()
                 .and()

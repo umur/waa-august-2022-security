@@ -10,6 +10,7 @@ import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.web.server.ResponseStatusException;
@@ -29,15 +30,18 @@ public class WaaRequestFilter {
     public void annotated() {}
     @Before("annotated()")
     public void checkActivity(JoinPoint joinPoint) {
-        WaaUserDetails userDetails = (WaaUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        Instant now = Instant.now();
-        Instant thirtyMinEarlier = now.minus(30, ChronoUnit.MINUTES);
-        List<Counter> activities = repository.findAllByUserIdAndCreatedAtBetween(userDetails.getId(), thirtyMinEarlier, now);
-        if (activities.size() > 5) {
-            Instant lastActivityTime = activities.get(4).getCreatedAt();
-            if (lastActivityTime.plus(15, ChronoUnit.MINUTES).isAfter(now))  {
-                long waitMinutes = (lastActivityTime.plus(15, ChronoUnit.MINUTES).getEpochSecond() - now.getEpochSecond()) / 60;
-                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, String.format("Max Bad Words Requests Limit has been Reached. You need wait for %o minutes.", waitMinutes));
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (!authentication.getPrincipal().toString().equals("anonymousUser")) {
+            WaaUserDetails userDetails = (WaaUserDetails) authentication.getPrincipal();
+            Instant now = Instant.now();
+            Instant thirtyMinEarlier = now.minus(30, ChronoUnit.MINUTES);
+            List<Counter> activities = repository.findAllByUserIdAndCreatedAtBetween(userDetails.getId(), thirtyMinEarlier, now);
+            if (activities.size() > 5) {
+                Instant lastActivityTime = activities.get(4).getCreatedAt();
+                if (lastActivityTime.plus(15, ChronoUnit.MINUTES).isAfter(now))  {
+                    long waitMinutes = (lastActivityTime.plus(15, ChronoUnit.MINUTES).getEpochSecond() - now.getEpochSecond()) / 60;
+                    throw new ResponseStatusException(HttpStatus.BAD_REQUEST, String.format("Max Bad Words Requests Limit has been Reached. You need wait for %o minutes.", waitMinutes));
+                }
             }
         }
     }
