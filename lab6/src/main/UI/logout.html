@@ -1,0 +1,37 @@
+<html>
+<head>
+    <title>lab6</title>
+</head>
+<body>
+firstname <input id="fname" type="text">
+lastname <input id="lname" type="text">
+username: <input id="username" type="text">
+password <input id="pass" type="password">
+<input type="button" onclick="signup()" value="sign up">
+<script>
+    function signup() {
+        let fname = document.getElementById("fname").value;
+        let lname = document.getElementById("lname").value;
+        let user = document.getElementById("username").value;
+        let pass = document.getElementById("pass").value;
+        fetch("http://localhost:8080/api/v1/uaa/signup", {
+            method: 'POST',
+            body: JSON.stringify({
+                firstname: fname,
+                lastname: lname,
+                email: user,
+                password: pass
+            }),
+            headers: {
+                'Content-type': 'application/json; charset=UTF-8'
+            },
+        })
+            .then(result => result.json())
+            .then(result => {
+                console.log("success");
+            })
+            .catch(err => window.alert(err));
+    }
+</script>
+</body>
+</html>
