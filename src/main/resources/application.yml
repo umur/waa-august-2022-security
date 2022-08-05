@@ -1,0 +1,22 @@
+
+spring:
+  application:
+    name: waa-august-2022-security
+  datasource:
+    password: Iloveyoumum_19987166
+    url: jdbc:postgresql://localhost:5432/spring_security
+    username: postgres
+  jpa:
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+    show-sql: true
+    defer-datasource-initialization: true
+  sql:
+    init:
+      mode: always
+server:
+  port: 8080
