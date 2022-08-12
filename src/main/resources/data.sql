@@ -1,0 +1,1 @@
+INSERT into address values ('Addis Ababa' , 'ghgj' , 'hjh' , 1);
