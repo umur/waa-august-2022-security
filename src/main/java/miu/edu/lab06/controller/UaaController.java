@@ -20,6 +20,12 @@ public class UaaController {
         return service.login(body);
     }
 
+    @PostMapping("refresh")
+    public Map<String, String> refresh(@RequestBody Map<String, String> body) {
+        String refreshToken = body.get("refresh_token");
+        return service.refresh(refreshToken);
+    }
+
     @GetMapping("validate")
     public Map<String, Boolean> validate() {
         return service.validate();

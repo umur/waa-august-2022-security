@@ -27,23 +27,18 @@ public class UaaServiceImpl implements UaaService {
         String password = body.get("password");
         var request = new UsernamePasswordAuthenticationToken(username, password);
         final String accessToken = jwtHelper.generateToken(username);
-        final String refreshToken = jwtHelper.generateRefreshToken(password);
-        Map<String, String> tokenBody = new HashMap<>();
-        tokenBody.put("access_token", accessToken);
-        tokenBody.put("refresh_token", refreshToken);
+        final String refreshToken = jwtHelper.generateRefreshToken(username);
         manager.authenticate(request);
-        return tokenBody;
+        return Map.of("access_token", accessToken, "refresh_token", refreshToken);
     }
 
     @Override
-    public Map<String, String> refresh(String refreshToken) {
-        boolean isRefreshTokenValid = jwtHelper.validateToken(refreshToken);
+    public Map<String, String> refresh(String oldToken) {
+        boolean isRefreshTokenValid = jwtHelper.validateToken(oldToken);
         if (isRefreshTokenValid) {
-            final String accessToken = jwtHelper.generateToken(jwtHelper.getSubject(refreshToken));
-            Map<String, String> tokenBody = new HashMap<>();
-            tokenBody.put("access_token", accessToken);
-            tokenBody.put("refresh_token", refreshToken);
-            return tokenBody;
+            final String accessToken = jwtHelper.generateToken(jwtHelper.getSubject(oldToken));
+            final String refreshToken = jwtHelper.generateRefreshToken(jwtHelper.getSubject(oldToken));
+            return Map.of("access_token", accessToken, "refresh_token", refreshToken);
         }
         return new HashMap<>();
     }
