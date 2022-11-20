@@ -1,0 +1,19 @@
+###
+
+POST http://localhost:8080/api/uaa/signin
+content-type: application/json
+
+{
+  "username": "esaintor",
+  "password": "esaintor"
+}
+
+### refresh token
+POST http://localhost:8080/api/uaa/refresh
+content-type: application/json
+
+{
+  "refresh_token": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJlc2FpbnRvciIsImlhdCI6MTY2ODQ1Mzk4NywiZXhwIjoxNjY4Nzc3OTg3fQ.c2c8AJm2uYAnI45jyT6SqzY8nX-IIvdgrFtmfj1jNnZuYChNv9FEIR3j-raibzf247RmT5RxgnSLXJozZxOqmg"
+}
+
+###
